@@ -1,0 +1,50 @@
+<html>
+
+<head>
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.min.css" />
+</head>
+
+<body>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-ui-select/dist/select.min.js"></script>
+
+    <script src="Scripts/Angular/app.module.js"></script>
+    <script src="Scripts/Angular/Controller/UiSelect.Controller.js"></script>
+    <div class="body-content" ng-app="App">
+        <div ng-controller="UiSelectController as model" ng-init="model.Initialise()">
+            <div class="row">
+                <div class="col-sm-offset-3 col-sm-6">
+                    Single Select:
+                    <ui-select ng-model="model.SingleSelected">
+                        <ui-select-match>
+                            <span ng-bind="$select.selected.DropDownItemDescription"></span>
+                        </ui-select-match>
+                        <ui-select-choices repeat="dropDownItem in (model.DropDownItems | filter: $select.search) track by $index">
+                            <span ng-bind="dropDownItem.DropDownItemDescription"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                    {{model.SingleSelected}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-offset-3 col-sm-6">
+                    Miltiple Select:
+                    <ui-select multiple ng-model="model.MultipleSelected">
+                        <ui-select-match placeholder="Select person...">
+                            {{$item.DropDownItemId}} - {{$item.DropDownItemDescription}} 
+                        </ui-select-match>
+                        <ui-select-choices repeat="dropDownItem in (model.DropDownItems | filter: $select.search) track by $index">
+                            <span ng-bind="dropDownItem.DropDownItemDescription"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                    {{model.MultipleSelected}}
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
