@@ -1,0 +1,37 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<form action="/Home/FormUpload" method="post" enctype="multipart/form-data">
+    <h1>Form Upload</h1>
+    <label for="file">Filename:</label>
+    <input type="file" name="file" id="file" />
+    <input type="submit" />
+</form>
+<hr />
+<form action="Home/FormMultipleUpload" method="post" enctype="multipart/form-data">
+    <h1>Form Multiple Upload</h1>
+    <label for="file1">Filename:</label>
+    <input type="file" name="files" id="file1" />
+
+    <label for="file2">Filename:</label>
+    <input type="file" name="files" id="file2" />
+
+    <input type="submit" />
+</form>
+<hr />
+
+<script src="~/bower_components/angular/angular.js"></script>
+<script src="~/Scripts/Angular/app.module.js"></script>
+<script src="~/Scripts/Angular/Controller/Upload.Controller.js"></script>
+<script src="~/Scripts/Angular/Directive/FileUpload.js"></script>
+<script src="~/Scripts/Angular/Service/Upload.Service.js"></script>
+
+<form ng-app="App" ng-controller="UploadController as model">
+    <h1>Angular File Upload</h1>
+    <label for="file">Filename:</label>
+    <input type="file" file-model="model.Attachment" />
+    <input type="submit" ng-click="model.UploadAttachment()" />
+</form>
+<hr />
