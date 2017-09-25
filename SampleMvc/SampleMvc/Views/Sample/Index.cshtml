@@ -1,0 +1,14 @@
+﻿@using SampleMvc.Models;
+@{
+    ViewBag.Title = "Index";
+}
+
+<label>@Model.SampleProperty1</label>
+<label>@Model.SampleProperty2</label>
+<label>@Model.SampleProperty3</label>
+<form method="post" action="~/Sample/Index">
+    <input type="text" name="SampleProperty1" />
+    <input type="text" name="SampleProperty2" />
+    <input type="submit" value="Submit" />
+</form>
+
