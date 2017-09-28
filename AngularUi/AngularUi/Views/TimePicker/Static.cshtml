@@ -1,0 +1,64 @@
+﻿
+@{
+    ViewBag.Title = "Static";
+}
+<div ng-app="App" ng-controller="TimepickerDemoCtrl">
+
+    <div uib-timepicker ng-model="mytime" ng-change="changed()" hour-step="hstep" minute-step="mstep" show-meridian="ismeridian"></div>
+
+    <pre class="alert alert-info">Time is: {{mytime | date:'shortTime' }}</pre>
+
+    <div class="row">
+        <div class="col-xs-6">
+            Hours step is:
+            <select class="form-control" ng-model="hstep" ng-options="opt for opt in options.hstep"></select>
+        </div>
+        <div class="col-xs-6">
+            Minutes step is:
+            <select class="form-control" ng-model="mstep" ng-options="opt for opt in options.mstep"></select>
+        </div>
+    </div>
+
+    <hr>
+
+    <button type="button" class="btn btn-info" ng-click="toggleMode()">12H / 24H</button>
+    <button type="button" class="btn btn-default" ng-click="update()">Set to 14:00</button>
+    <button type="button" class="btn btn-danger" ng-click="clear()">Clear</button>
+
+</div>
+
+@section scripts {
+    <script>
+        angular.module('App', ['ngAnimate', 'ngSanitize', 'ui.bootstrap']).controller('TimepickerDemoCtrl', function ($scope, $log) {
+            $scope.mytime = new Date();
+
+            $scope.hstep = 1;
+            $scope.mstep = 15;
+
+            $scope.options = {
+                hstep: [1, 2, 3],
+                mstep: [1, 5, 10, 15, 25, 30]
+            };
+
+            $scope.ismeridian = true;
+            $scope.toggleMode = function () {
+                $scope.ismeridian = !$scope.ismeridian;
+            };
+
+            $scope.update = function () {
+                var d = new Date();
+                d.setHours(14);
+                d.setMinutes(0);
+                $scope.mytime = d;
+            };
+
+            $scope.changed = function () {
+                $log.log('Time changed to: ' + $scope.mytime);
+            };
+
+            $scope.clear = function () {
+                $scope.mytime = null;
+            };
+        });
+    </script>
+}

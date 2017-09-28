@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewBag.Title = "Static";
+}
+<div ng-app="App" ng-controller="StaticTimePickerController as model"  ng-init="model.Initialise()">
+
+    <div uib-timepicker ng-model="model.Time" hour-step="model.Hstep" minute-step="model.Mstep" show-meridian="model.Ismeridian"></div>
+
+    <pre class="alert alert-info">Time is: {{model.Time | date:'shortTime' }}</pre>
+
+    <div class="row">
+        <div class="col-xs-6">
+            Hours step is:
+            <select class="form-control" ng-model="model.Hstep" ng-options="opt for opt in model.StepOptions.Hstep"></select>
+        </div>
+        <div class="col-xs-6">
+            Minutes step is:
+            <select class="form-control" ng-model="model.Mstep" ng-options="opt for opt in model.StepOptions.Mstep"></select>
+        </div>
+    </div>
+
+    <hr>
+
+    <button type="button" class="btn btn-info" ng-click="model.ToggleMode()">12H / 24H</button>
+    <button type="button" class="btn btn-default" ng-click="model.Update()">Set to 14:00</button>
+    <button type="button" class="btn btn-danger" ng-click="model.Clear()">Clear</button>
+
+</div>
+
+@section scripts {
+    <script src="~/Scripts/Angular/app.module.js"></script>
+    <script src="~/Scripts/Angular/Controller/StaticTimePicker.Controller.js"></script>
+}
